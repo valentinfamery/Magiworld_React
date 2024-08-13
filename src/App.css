@@ -36,3 +36,50 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.column {
+  width: 20%;
+  background-color: #f0f0f0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.left-column {
+  font-size: 16px;
+  /* Styles spécifiques à la colonne de gauche */
+}
+
+.right-column {
+  font-size: 16px;
+  /* Styles spécifiques à la colonne de droite */
+}
+
+.button-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.center-button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.text-input {
+  width: 90%; /* Largeur du champ de saisie */
+  padding: 10px; /* Espacement à l'intérieur du champ */
+  margin-top: 10px; /* Espacement au-dessus du champ */
+  border: 1px solid #ccc; /* Bordure du champ */
+  border-radius: 4px; /* Coins arrondis */
+}
+
