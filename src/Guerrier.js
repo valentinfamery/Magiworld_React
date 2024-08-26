@@ -1,4 +1,5 @@
-class Guerrier extends Personnage {
+import {Personnage} from './Personnage';
+export class Guerrier extends Personnage {
     constructor(niveau, force, agilite, intelligence, playerNumber) {
       super(niveau, force, agilite, intelligence, playerNumber);
     }

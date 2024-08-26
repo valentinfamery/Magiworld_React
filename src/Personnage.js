@@ -1,4 +1,4 @@
-class Personnage {
+export class Personnage {
     constructor(niveau, force, agilite, intelligence, playerNumber) {
       if (this.constructor === Personnage) {
         throw new Error("Cannot instantiate abstract class Personnage directly");

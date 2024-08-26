@@ -1,4 +1,5 @@
-class Rodeur extends Personnage {
+import {Personnage} from './Personnage';
+export class Rodeur extends Personnage {
     constructor(niveau, force, agilite, intelligence, playerNumber) {
       super(niveau, force, agilite, intelligence, playerNumber);
     }
