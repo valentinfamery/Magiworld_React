@@ -1,12 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 export default function Game() {
 
  
   const location = useLocation();
 
-  let  player1 = location.state.player1;
+  let player1 = location.state.player1;
   let player2 = location.state.player2;
+
+  const [viePlayer1,setViePlayer1] = useState(player1.getVie());
+  const [viePlayer2,setViePlayer2] = useState(player2.getVie());
+
+
+  
+  
+
+  const clickAttackBase = (attack,defend) => {
+    return () => {
+    attack.attackBase(defend);
+   updatevie()
+    };
+    
+  }
+
+  const clickAttackSpecial = (attack,defend) => {
+    return () => {
+      attack.attackSpecial(defend);
+      updatevie()
+    };
+    
+   
+  }
+
+
+  
+
+   const updatevie = () => {
+
+    setViePlayer1(player1.getVie());
+    setViePlayer2(player2.getVie());
+
+      
+  }
+
+ 
+  
+
+  
+  
+
+  
+
+
  
 
     //Start(player1,player2)
@@ -14,21 +59,54 @@ export default function Game() {
       
     <div className="column left-column">
       <text>{
-         player1.getVie().toString() 
+         viePlayer1.toString() 
         }
      
       </text>
      
-      <HealthBar maxHealth={100}/>
+      <HealthBar maxHealth={viePlayer1}/>
+
+
+      <div className="row">
+      <button  
+                onClick={
+                  clickAttackBase(player1,player2)
+                }
+        >
+          attackBase
+        </button>
+        <button  
+                onClick={clickAttackSpecial(player1,player2)}
+        >
+          attackSpecial
+        </button>
+
+      </div>
+
     </div>
 
     <div className="column right-column">
       <text>
         {
-          player2.getVie().toString()
+          viePlayer2.toString()
         }
       </text>
-    <HealthBar maxHealth={100}/>
+    <HealthBar maxHealth={viePlayer2}/>
+
+    <div className="row">
+      <button  
+                onClick={clickAttackBase(player2,player1)}
+        >
+          attackBase
+        </button>
+        <button  
+                onClick={clickAttackSpecial(player2,player1)}
+        >
+          attackSpecial
+        </button>
+
+      </div>
+
     </div>
      
   </div>;
@@ -71,9 +149,9 @@ function Start(player1,player2) {
 
   while (player1.getVie() > 0 && player2.getVie() > 0) {
     if (turn % 2 === 1) {
-      turnAction(player1, player2);
+      //turnAction(player1, player2);
     } else {
-      turnAction(player2, player1);
+      //turnAction(player2, player1);
     }
     turn++;
   }
@@ -85,13 +163,3 @@ function Start(player1,player2) {
   }
 }
 
-function turnAction(attack, defend) {
-  console.log(`Player ${attack.getPlayerNumber()} (${attack.getVie()} health) please choose your action (1: Basic Attack, 2: Special Attack)`);
-  let choix ;
-
-  if (choix === 1) {
-    attack.attackBase(defend);
-  } else {
-    attack.attackSpecial(defend);
-  }
-}
