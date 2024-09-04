@@ -247,13 +247,13 @@ function instanciationPersonnage(classe, niveau, force, agilite, intelligence, p
   let temp = null;
   switch (classe) {
     case "Guerrier":
-      temp = new Guerrier(niveau, force, agilite, intelligence, playerNumber);
+      temp = new Guerrier(niveau, force, agilite, intelligence, playerNumber,"https://needcoolershoes.com/skins/4769/embed");
       break;
     case "Rôdeur":
-      temp = new Rodeur(niveau, force, agilite, intelligence, playerNumber);
+      temp = new Rodeur(niveau, force, agilite, intelligence, playerNumber,"https://needcoolershoes.com/skins/979/embed");
       break;
     case "Mage":
-      temp = new Mage(niveau, force, agilite, intelligence, playerNumber);
+      temp = new Mage(niveau, force, agilite, intelligence, playerNumber,"https://needcoolershoes.com/skins/476/embed");
       break;
     default:
       console.log('Classe inconnue');

@@ -1,0 +1,36 @@
+/* src/components/Character.css */
+.character {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    display: inline-block;
+  }
+  
+  .character.player1 {
+    background-color: lightblue;
+  }
+  
+  .character.player2 {
+    background-color: lightcoral;
+  }
+  
+  @keyframes basic-attack {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+    100% { transform: translateX(0); }
+  }
+  
+  @keyframes special-attack {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+  }
+  
+  .basic-attack {
+    animation: basic-attack 0.5s ease-in-out;
+  }
+  
+  .special-attack {
+    animation: special-attack 0.5s ease-in-out;
+  }
+  

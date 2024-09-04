@@ -1,5 +1,5 @@
 export class Personnage {
-    constructor(niveau, force, agilite, intelligence, playerNumber) {
+    constructor(niveau, force, agilite, intelligence, playerNumber,asset) {
       if (this.constructor === Personnage) {
         throw new Error("Cannot instantiate abstract class Personnage directly");
       }
@@ -9,6 +9,7 @@ export class Personnage {
       this.agilite = agilite;
       this.intelligence = intelligence;
       this.playerNumber = playerNumber;
+      this.asset = asset;
     }
   
     // ---- Getters ----
@@ -35,6 +36,10 @@ export class Personnage {
   
     getPlayerNumber() {
       return this.playerNumber;
+    }
+
+    getAsset() {
+      return this.asset;
     }
   
     // ---- Setters ----

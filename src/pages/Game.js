@@ -1,5 +1,8 @@
 import React, { useState,useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
+import './Character.css';
+
+
 export default function Game() {
 
   const location = useLocation();
@@ -27,26 +30,36 @@ export default function Game() {
 
   const addItem = (newItem) => {
     setItems([...events, newItem]);
-  };
+  }
 
-  const clickAttackBase = (attack,defend) => {
+  const clickAttackBase = (name,attack,defend) => {
     return () => {
       if (stateOfGame === State.Demarré) {
       attack.attackBase(defend);
       updatevie();
       setTurn(turn+1);
-      addItem(`a utilisé une attaque de base contre`);
+      addItem(`${name}  a utilisé une attaque de base contre`);
+
+      
+
+
+
       }
     };
   }
 
-  const clickAttackSpecial = (attack,defend) => {
+  const clickAttackSpecial = (name,attack,defend) => {
     return () => {
       if (stateOfGame === State.Demarré) {
       attack.attackSpecial(defend);
       updatevie();
       setTurn(turn+1);
-      addItem(`a utilisé une attaque spéciale contre`);
+      addItem(`${name} a utilisé une attaque spéciale contre`);
+
+      
+
+
+
       }
     };
   }
@@ -79,11 +92,11 @@ export default function Game() {
     return <div className="container">
 
 <div className="button-container">
-<ul>
+<ol>
       {events.map((event, index) => (
         <li key={index}>{event}</li>
       ))}
-      </ul>
+      </ol>
 
       <button 
       className="center-button"
@@ -101,11 +114,16 @@ export default function Game() {
      
       <HealthBar health={viePlayer1} maxHealth={initViePlayer1}/>
 
+     
 
+      <Character
+        player="player1"
+        playerClass={player2}
+      />
+      
       <RowButtonPlayer1 player1={player1} player2={player2} turn={turn} clickAttackBase={clickAttackBase} clickAttackSpecial={clickAttackSpecial} State={State} stateOfGame={stateOfGame}/>
 
-
-     
+      
 
     </div>
 
@@ -117,7 +135,16 @@ export default function Game() {
       </text>
     <HealthBar health={viePlayer2} maxHealth={initViePlayer2}/>
 
+    
+
+    <Character
+        player="player2"
+        playerClass={player2}
+      />
+      
     <RowButtonPlayer2 player1={player1} player2={player2} turn={turn} clickAttackBase={clickAttackBase} clickAttackSpecial={clickAttackSpecial} State={State} stateOfGame={stateOfGame}/>
+
+    
 
     </div>
      
@@ -152,13 +179,13 @@ function RowButtonPlayer1({player1,player2,turn,clickAttackBase,clickAttackSpeci
     return (<div className="row">
       <button  
                 onClick={
-                  clickAttackBase(player1,player2)
+                  clickAttackBase('Player 1',player1,player2)
                 }
         >
           attackBase
         </button>
         <button  
-                onClick={clickAttackSpecial(player1,player2)}
+                onClick={clickAttackSpecial('Player 1',player1,player2)}
         >
           attackSpecial
         </button>
@@ -173,10 +200,10 @@ function RowButtonPlayer2({player1,player2,turn,clickAttackBase,clickAttackSpeci
   if (turn % 2 === 0 && stateOfGame === State.Demarré) {
     return (
       <div className="row">
-        <button onClick={clickAttackBase(player2, player1)}>
+        <button onClick={clickAttackBase('Player 2',player2, player1)}>
           Attaque de base
         </button>
-        <button onClick={clickAttackSpecial(player2, player1)}>
+        <button onClick={clickAttackSpecial('Player 2',player2, player1)}>
           Attaque spéciale
         </button>
       </div>
@@ -186,5 +213,15 @@ function RowButtonPlayer2({player1,player2,turn,clickAttackBase,clickAttackSpeci
   }
 
 }
+
+export const Character = ({player,playerClass}) => {
+  return (
+    <div className={`character ${player}`}>
+<iframe src={playerClass.getAsset()} width="200" height="300" ></iframe>
+    </div>
+  );
+};
+
+
 
 

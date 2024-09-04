@@ -1,7 +1,7 @@
 import {Personnage} from './Personnage';
 export class Rodeur extends Personnage {
-    constructor(niveau, force, agilite, intelligence, playerNumber) {
-      super(niveau, force, agilite, intelligence, playerNumber);
+    constructor(niveau, force, agilite, intelligence, playerNumber,asset) {
+      super(niveau, force, agilite, intelligence, playerNumber,asset);
     }
   
     // ---- Class methods ----
