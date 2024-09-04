@@ -10,8 +10,8 @@ export default function Game() {
   let player1 = location.state.player1;
   let player2 = location.state.player2;
 
-  const initViePlayer1 = player1.getVie();
-  const initViePlayer2 = player2.getVie();
+  const [initViePlayer1] = useState(player1.getVie());
+  const [initViePlayer2] = useState(player2.getVie());
 
   const [viePlayer1,setViePlayer1] = useState(player1.getVie());
   const [viePlayer2,setViePlayer2] = useState(player2.getVie());
@@ -118,7 +118,7 @@ export default function Game() {
 
       <Character
         player="player1"
-        playerClass={player2}
+        playerClass={player1}
       />
       
       <RowButtonPlayer1 player1={player1} player2={player2} turn={turn} clickAttackBase={clickAttackBase} clickAttackSpecial={clickAttackSpecial} State={State} stateOfGame={stateOfGame}/>
@@ -156,12 +156,12 @@ export default function Game() {
 
 function HealthBar({health,maxHealth}) {
   
-  const healthPercentage = (health / 60) * 100;
+  const healthPercentage = (health / maxHealth) * 100;
 
   console.log(maxHealth);
 
   return (
-    <div style={{ border: '1px solid black', width: '60px', height: '30px' }}>
+    <div style={{ border: '1px solid black', width: '300px', height: '30px' }}>
       <div
         style={{
           width: `${healthPercentage}%`,
