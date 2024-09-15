@@ -74,6 +74,10 @@ export default function App() {
   
   };
 
+  const clickTestWeather = (event) => {
+    navigate("/testweather")
+  }
+
 
 
 
@@ -236,6 +240,12 @@ export default function App() {
                 onClick={handleClick}
         >
           Jouer
+        </button>
+
+        <button className="center-button" 
+                onClick={clickTestWeather}
+        >
+          TestWeather
         </button>
 
       </div>

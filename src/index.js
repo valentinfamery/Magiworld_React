@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals';
 
 import Game from './pages/Game'
 
+import TestWeather from './pages/TestWeather'
+
 import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
     path: "/game",
     element: <Game/>,
   },
+  {
+    path: "/testweather",
+    element: <TestWeather/>,
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(
