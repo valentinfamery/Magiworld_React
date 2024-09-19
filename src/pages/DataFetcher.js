@@ -5,8 +5,27 @@ export default function DataFetcher() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const envoyerDonnees = async (gamePartId,playerVictorious ) => {
+    try {
+      const reponse = await fetch('http://localhost:5095/gameparts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          GamePartId: gamePartId,
+          playerVictorious: playerVictorious
+        }),
+      });
+      const donnees = await reponse.json();
+      console.log(donnees);
+    } catch (erreur) {
+      console.error('Erreur :', erreur);
+    }
+  };
+
   useEffect(() => {
-    fetch('http://localhost:5095/weatherforecast')
+    fetch('http://localhost:5095/gameparts')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -32,6 +51,15 @@ export default function DataFetcher() {
     <div>
       Fetched Data
       {JSON.stringify(data, null, 2)}
+
+      <button onClick={
+        () => 
+        envoyerDonnees(Math.floor(Math.random() * 900000) + 100000,"Non Determiné")
+        
+        }>
+          Envoyez donnees
+      </button>
+
     </div>
   );
 
