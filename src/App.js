@@ -5,6 +5,7 @@ import {Guerrier} from'./Guerrier';
 import {Rodeur} from'./Rodeur';
 import {Mage} from'./Mage';
 
+
 export default function App() {
 
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function App() {
 
   
 
-  const handleClick = (event)=> {
+  function handleClick (event) {
 
     let statsPlayer1 = (inputForcePlayer1 + inputAgilitéPlayer1 + inputIntelligencePlayer1);
 
@@ -58,6 +59,9 @@ export default function App() {
         " + " + inputAgilitéPlayer2 + " d'agilité + " + inputIntelligencePlayer2 + " d’intelligence : le total doit faire " + inputNiveauPlayer2);
 
     }
+    else if (inputNiveauPlayer1 == 0 || inputNiveauPlayer2 == 0){
+      setMessage("Un Joueur ne peut pas avoir en Niveau 0");
+    }
     
     else{
       player1 = createPlayer(imputClassePlayer1,inputNiveauPlayer1,inputForcePlayer1,inputIntelligencePlayer1,inputAgilitéPlayer1,1)
@@ -74,7 +78,7 @@ export default function App() {
   
   };
 
-  const clickTestWeather = (event) => {
+  function clickTestWeather(event)  {
     navigate("/testweather")
   }
 
@@ -82,16 +86,37 @@ export default function App() {
 
 
 
-  const handleClassePlayer1 = (event) => {
+  function handleClassePlayer1(event){
     setImputClassePlayer1(event.target.value);
   };
 
-  const handleClassePlayer2 = (event) => {
+  function handleClassePlayer2(event){
     setImputClassePlayer2(event.target.value);
   };
 
   return (
+
+    <div className="column-page">
+
+    <div className="container-top">
+
+    <button className="bouton" 
+                onClick={clickTestWeather}
+        >
+          Parties
+        </button>
+
+    </div>
+
+
+
+
     <div className="container">
+
+
+
+
+
       <div className="column left-column">
         
           <h2>Joueur 1</h2>
@@ -231,24 +256,18 @@ export default function App() {
 
         
       </div>
-      <div className="button-container">
+      
+    </div>
 
-        <text>{message}</text>
+    <text>{message}</text>
 
       
-        <button className="center-button" 
+        <button className="bouton" 
                 onClick={handleClick}
         >
           Jouer
         </button>
 
-        <button className="center-button" 
-                onClick={clickTestWeather}
-        >
-          TestWeather
-        </button>
-
-      </div>
     </div>
   );
 }

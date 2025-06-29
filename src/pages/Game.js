@@ -28,6 +28,7 @@ export default function Game() {
   
   const [events, setItems] = useState([]);
 
+
   const addItem = (newItem) => {
     setItems([...events, newItem]);
   }
@@ -99,7 +100,7 @@ export default function Game() {
       </ol>
 
       <button 
-      className="center-button"
+      className="bouton"
       onClick={() => setStateOfGame(State.Demarré)}>
         Demarré
       </button>
@@ -119,6 +120,7 @@ export default function Game() {
       <Character
         player="player1"
         playerClass={player1}
+        title="Player 1"
       />
       
       <RowButtonPlayer1 player1={player1} player2={player2} turn={turn} clickAttackBase={clickAttackBase} clickAttackSpecial={clickAttackSpecial} State={State} stateOfGame={stateOfGame}/>
@@ -140,6 +142,7 @@ export default function Game() {
     <Character
         player="player2"
         playerClass={player2}
+        title="Player 2"
       />
       
     <RowButtonPlayer2 player1={player1} player2={player2} turn={turn} clickAttackBase={clickAttackBase} clickAttackSpecial={clickAttackSpecial} State={State} stateOfGame={stateOfGame}/>
@@ -177,14 +180,14 @@ function HealthBar({health,maxHealth}) {
 function RowButtonPlayer1({player1,player2,turn,clickAttackBase,clickAttackSpecial,State,stateOfGame}){
   if (turn % 2 === 1 && stateOfGame === State.Demarré) {
     return (<div className="row">
-      <button  
+      <button  className="bouton"
                 onClick={
                   clickAttackBase('Player 1',player1,player2)
                 }
         >
           attackBase
         </button>
-        <button  
+        <button className="bouton"
                 onClick={clickAttackSpecial('Player 1',player1,player2)}
         >
           attackSpecial
@@ -200,10 +203,10 @@ function RowButtonPlayer2({player1,player2,turn,clickAttackBase,clickAttackSpeci
   if (turn % 2 === 0 && stateOfGame === State.Demarré) {
     return (
       <div className="row">
-        <button onClick={clickAttackBase('Player 2',player2, player1)}>
+        <button className="bouton" onClick={clickAttackBase('Player 2',player2, player1)}>
           Attaque de base
         </button>
-        <button onClick={clickAttackSpecial('Player 2',player2, player1)}>
+        <button className="bouton" onClick={clickAttackSpecial('Player 2',player2, player1)}>
           Attaque spéciale
         </button>
       </div>
@@ -214,10 +217,10 @@ function RowButtonPlayer2({player1,player2,turn,clickAttackBase,clickAttackSpeci
 
 }
 
-export const Character = ({player,playerClass}) => {
+export const Character = ({player,playerClass,title}) => {
   return (
     <div className={`character ${player}`}>
-<iframe src={playerClass.getAsset()} width="200" height="300" ></iframe>
+<iframe src={playerClass.getAsset()} width="200" height="300" title={title} ></iframe>
     </div>
   );
 };

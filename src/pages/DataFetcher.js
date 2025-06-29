@@ -7,7 +7,7 @@ export default function DataFetcher() {
 
   const envoyerDonnees = async (gamePartId,playerVictorious ) => {
     try {
-      const reponse = await fetch('http://localhost:5095/gameparts', {
+      const reponse = await fetch('http://localhost:5000/gameparts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,8 +24,9 @@ export default function DataFetcher() {
     }
   };
 
-  useEffect(() => {
-    fetch('http://localhost:5095/gameparts')
+  const recevoirDonnees = async () => {
+    
+    fetch('http://localhost:5000/gameparts')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -33,14 +34,19 @@ export default function DataFetcher() {
         return response.json();
       })
       .then(data => {
-        setData(data);
+        setData(JSON.parse(JSON.stringify(data)));
         setLoading(false);
       })
       .catch(error => {
         setError(error);
         setLoading(false);
       }
-);
+    );
+  
+  };
+
+  useEffect(() => {
+    recevoirDonnees()
   }, []);
 
   if (loading) return <div>Chargement...</div>;
@@ -49,13 +55,29 @@ export default function DataFetcher() {
 
   return (
     <div>
-      Fetched Data
-      {JSON.stringify(data, null, 2)}
 
       <button onClick={
         () => 
-        envoyerDonnees(Math.floor(Math.random() * 900000) + 100000,"Non Determiné")
+          recevoirDonnees()
         
+        }>
+          rafraichir
+      </button>
+
+
+      <h1>Liste des objets</h1>
+      <ul>
+        {data.map(gamepart => (
+          <li key={gamepart.GamePartId}>{gamepart.playerVictorious}</li>
+        ))}
+      </ul>
+
+
+      <button onClick={
+        () => {
+        envoyerDonnees(Math.floor(Math.random() * 900000) + 100000,"Non Determiné");
+        recevoirDonnees();
+        }
         }>
           Envoyez donnees
       </button>
